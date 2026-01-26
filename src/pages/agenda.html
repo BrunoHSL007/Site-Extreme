@@ -1,101 +1,10 @@
-<!DOCTYPE html>
-<html>
+<div class="container">
+    <button class="backmain" onclick='go("home")'>
+        <img class="logosub" src="src/images/LOGO X.png">
+    </button>
 
-<head lang="pt-br">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width-device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../index.css">
-    <title>Extreme | Agenda</title>
-    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-    <link rel="shortcut icon" sizes="192x192" href="src/images/logo x.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="src/images/logo x.ico">
-</head>
+    <img class="logotitle" src="src/images/Agenda.png">
 
-<body class="background">
-    <div class="container">
-        <button class="backmain" onclick='location.href="../../"'>
-            <img class="logosub" src="../images/LOGO X.png">
-        </button>
+    <div class="posts"></div>        
 
-        <img class="logotitle" src="../images/Agenda.png">
-
-        <div class="posts"></div>        
-
-    </div>
-</body>
-<script>
-
-    function parseData(valor) {
-        if (!/^\d{4}-\d{2}-\d{2}$/.test(valor)) return null;
-
-        const [y, m, d] = valor.split('-');
-        return new Date(y, m - 1, d);
-    }
-
-    
-    fetch("/.netlify/functions/getSheets")
-        .then(r => r.json())
-        .then(data => {
-            const postsDiv = document.querySelector('.posts');
-            postsDiv.className = 'textwithenter';
-
-            data.map((item,count) => {
-                
-                const initialdate = parseData(item[3]);
-                const finaldate = parseData(item[4]);
-                const today = new Date();
-
-                if ((initialdate !== null && initialdate > today) || (finaldate !== null && finaldate < today)) {
-                    return;
-                }
-                const title = document.createElement('h1');
-                title.className = 'title';
-                title.textContent = item[0];
-
-                const scheduletitle = document.createElement('h1');
-                scheduletitle.className = 'scheduletitle';
-                scheduletitle.textContent = item[2];
-
-                const titleItems = document.createElement('div');
-                titleItems.className = 'titleItems';
-
-                titleItems.appendChild(title);
-                titleItems.appendChild(scheduletitle);
-                postsDiv.appendChild(titleItems);
-
-                const details = document.createElement('p');
-                details.className = 'details';
-                details.textContent = item[1];
-
-                postsDiv.appendChild(details);
-
-                if(item[5] && item[6]){
-                    const buttonDiv = document.createElement('button');
-                    buttonDiv.textContent = item[5];
-                    buttonDiv.className = 'btn';
-                    buttonDiv.onclick = () => {
-                        location.href = item[6];
-                    };
-                    postsDiv.appendChild(buttonDiv);
-                }
-
-                if(item[7]){
-                    const img = document.createElement('img');
-                    img.className = 'post';
-                    img.src = item[7];   
-                    img.onerror = function() {
-                        this.style.display = 'none';
-                    };
-                    postsDiv.appendChild(img);
-                }                
-
-                if(count < data.length - 1){
-                    const divider = document.createElement('div');
-                    divider.className = 'divider';
-                    postsDiv.appendChild(divider);
-                }
-
-            })
-        });
-</script>
-</html>
+</div>
