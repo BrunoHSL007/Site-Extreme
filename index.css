@@ -2,7 +2,16 @@
     font-family: 'Stretch';
     src: url('src/fonts/stretchpro/StretchPro.otf') format('opentype');
 }
+body{
+    font-variant-ligatures: none;
+}
+.textwithenter{
+    white-space: pre-line;
+}
 .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     margin-left: auto;
     margin-right: auto;
     max-width: 22em;
@@ -21,7 +30,7 @@
     background-size: cover;
 }
 .btn{
-    margin-top: 1em;
+    margin-bottom: 1em;
     padding-top: 0.7em;
     padding-bottom: 0.7em;
     min-width: 100%;
@@ -41,6 +50,7 @@
     max-width: 90%;
     margin-left: 5%;
     margin-right: 5%;
+    margin-bottom: 1em;
 }
 .logosub{
     max-width: 40%;
@@ -64,6 +74,7 @@
 .post{
     margin-top: 0.5em;
     max-width: 100%;
+    border-radius: 0.5em;
 }
 .title{
     font-family: 'Stretch';
@@ -71,6 +82,26 @@
     font-variant-caps: all-petite-caps;
     margin-bottom: 0.2em;
     margin-top: 0.2em;
+}
+.scheduletitle{
+    text-align: right;
+    font-family: 'Stretch';
+    color: whitesmoke;
+    font-variant-caps: all-petite-caps;
+    margin-bottom: 0.2em;
+    margin-top: 0.2em;
+}
+.titleItems{
+    display: flex;
+    justify-content: space-between;
+}
+.details{
+    font-family: 'Stretch';
+    color: whitesmoke;
+    font-variant-caps: all-petite-caps;
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+    
 }
 .textcenter{
     text-align: center;
@@ -94,4 +125,12 @@ h1{
     color: whitesmoke;
     font-variant-caps: all-petite-caps;
     text-align: center;
+}
+.madewith{
+    font-family: 'Stretch';
+    color: gray;
+    font-size: xx-small;
+    text-align: center;
+    margin-top: 2em;
+    text-decoration: none;
 }

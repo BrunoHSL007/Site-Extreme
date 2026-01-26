@@ -1,0 +1,23 @@
+{
+  "name": "site-extreme",
+  "version": "1.0.0",
+  "description": "Site criado com o intúito de divulgar informações gerais para o grupo de jovens. Criado com HTML + CSS + Javascript e utilizando a API do google Sheets para gerar informações para o site.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BrunoHSL007/Site-Extreme.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BrunoHSL007/Site-Extreme/issues"
+  },
+  "homepage": "https://github.com/BrunoHSL007/Site-Extreme#readme",
+  "dependencies": {
+    "googleapis": "^170.1.0"
+  }
+}
