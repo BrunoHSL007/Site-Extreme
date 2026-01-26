@@ -1,6 +1,6 @@
-import { google } from "googleapis";
+const { google } = require("googleapis");
 
-export async function handler(event, context) {
+exports.handler = async () => {
   try {
     const auth = new google.auth.JWT({
     email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
@@ -26,4 +26,4 @@ export async function handler(event, context) {
       body: JSON.stringify({ error: err.message || err }),
     };
   }
-}
+};
