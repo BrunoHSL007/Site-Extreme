@@ -1,0 +1,97 @@
+@font-face {
+    font-family: 'Stretch';
+    src: url('src/fonts/stretchpro/StretchPro.otf') format('opentype');
+}
+.container {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 22em;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    padding-right: 1em;
+    padding-left: 1em;
+  }
+.background {
+    position: relative;
+    height: 95vh;
+    width: 95vw;
+    background: url("src/images/background.jpg");
+    background-color: black;
+    background-attachment: fixed;
+    background-size: cover;
+}
+.btn{
+    margin-top: 1em;
+    padding-top: 0.7em;
+    padding-bottom: 0.7em;
+    min-width: 100%;
+    background-color: rgba(30, 30, 30, 0.5);
+    color: whitesmoke;
+    border-radius: 0.5em;
+    border-color: rgba(0, 0, 0, 0);
+    font-family: 'Stretch';
+    font-size: larger;
+    font-weight: 700;
+    font-variant-caps: all-petite-caps;
+}
+.btn:hover{
+    background-color: rgba(100, 100, 100, 0.5);
+}
+.logomain{
+    max-width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+.logosub{
+    max-width: 40%;
+    margin-left: 30%;
+    margin-right: 30%;
+}
+.logotitle{
+    max-width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 1em;
+    margin-bottom: 2em;
+}
+.pixlogo{
+    margin-top: 4em;
+    margin-bottom: 1em;
+    max-width: 22%;
+    margin-left: 39%;
+    margin-right: 39%;
+}
+.post{
+    margin-top: 0.5em;
+    max-width: 100%;
+}
+.title{
+    font-family: 'Stretch';
+    color: whitesmoke;
+    font-variant-caps: all-petite-caps;
+    margin-bottom: 0.2em;
+    margin-top: 0.2em;
+}
+.textcenter{
+    text-align: center;
+}
+h1{
+    font-size: xx-large;
+}
+.divider{
+    margin-top: 1em;
+    margin-bottom: 1em;
+    max-width: 100%;
+    height: 2px;
+    background-color:whitesmoke
+}
+.backmain{
+    background-color: transparent;
+    border-color: transparent;
+}
+.comingsoon{
+    font-family: 'Stretch';
+    color: whitesmoke;
+    font-variant-caps: all-petite-caps;
+    text-align: center;
+}

@@ -1,0 +1,16 @@
+{
+    "background_color": "black",
+    "description": "Extreme",
+    "display": "fullscreen",
+    "icons": [
+      {
+        "src": "src/images/logo x.ico",
+        "sizes": "192x192",
+        "type": "image/x-icon"
+      }
+    ],
+    "name": "Extreme - 16 IEQ",
+    "short_name": "Extreme",
+    "start_url": "index.html"
+  }
+  
