@@ -5,10 +5,27 @@ const [y, m, d] = valor.split("-");
 return new Date(y, m - 1, d);
 }
 
+let posts = document.querySelector('.posts');
+let cardtemplate = document.getElementById('card-template');
+for(let i = 0; i < 10; i++) {
+    posts.append(cardtemplate.content.cloneNode(true));
+}
+
+let sheetsData = null;
+
+async function getData(){
+    if(sheetsData) return sheetsData;
+    console.log("Fetching data...");
+    const res = await fetch("/.netlify/functions/getAgenda");
+    sheetsData = await res.json();
+    return sheetsData;
+}
+
 getData()
 .then(data => {
     const postsDiv = document.querySelector('.posts');
     postsDiv.className = 'textwithenter';
+    posts.innerHTML = '';
 
     data.map((item,count) => {
         
