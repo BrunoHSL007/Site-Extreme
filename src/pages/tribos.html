@@ -49,25 +49,33 @@
             <button class="btn btn-2ary skeleton textwithenter" events-buttonInfo></button>
 
             <div class="row" events-0>
-                <img src="" events-img-0 class="tribologo skeleton skeleton-image"/>
+                <div class="post-container skeleton skeleton-text">
+                    <img src="" events-img-0 class="tribologo"/>
+                </div>
                 <span class="skeleton skeleton-text" events-name-0></span>
                 <span class="skeleton skeleton-text" events-points-0></span>
             </div>
 
             <div class="row" events-1>
-                <img src="" events-img-1 class="tribologo skeleton skeleton-image"/>
+                <div class="post-container skeleton skeleton-text">
+                    <img src="" events-img-1 class="tribologo"/>
+                </div>
                 <span class="skeleton skeleton-text" events-name-1></span>
                 <span class="skeleton skeleton-text" events-points-1></span>
             </div>
 
             <div class="row" events-2>
-                <img src="" events-img-2 class="tribologo skeleton skeleton-image"/>
+                <div class="post-container skeleton skeleton-text">
+                    <img src="" events-img-2 class="tribologo"/>
+                </div>
                 <span class="skeleton skeleton-text" events-name-2></span>
                 <span class="skeleton skeleton-text" events-points-2></span>
             </div>
 
             <div class="row" events-3>
-                <img src="" events-img-3 class="tribologo skeleton skeleton-image"/>
+                <div class="post-container skeleton skeleton-text">
+                    <img src="" events-img-3 class="tribologo"/>
+                </div>
                 <span class="skeleton skeleton-text" events-name-3></span>
                 <span class="skeleton skeleton-text" events-points-3></span>
             </div>            
@@ -201,10 +209,7 @@
                 return acc;
             }, {})
         );
-        console.log(rankingPoints)
         rankingPoints.sort((a, b) => b.points - a.points);
-
-        console.log(rankingPoints)
 
         ranking.innerHTML = ""
 
