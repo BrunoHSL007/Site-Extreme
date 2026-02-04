@@ -1,3 +1,24 @@
+function parseDate(velue) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(velue)) return null;
+    const [y, m, d] = velue.split("-");
+    return new Date(y, m - 1, d);
+}
+
+function clearSkeleton(container){
+    container.querySelectorAll(".skeleton, .skeleton-text, .skeleton-image, .skeleton-detail")
+        .forEach(el => {
+            el.classList.remove("skeleton","skeleton-text","skeleton-image","skeleton-detail");
+        });
+}
+
+let sheetsData = []; 
+async function getData(file){
+    if(sheetsData[file]) return sheetsData[file];
+    console.log("Fetching data...");
+    const res = await fetch(`/.netlify/functions/${file}`);
+    sheetsData[file] = await res.json();
+    return sheetsData[file];
+}
 
 function getOnlyHtml(html) {
   return html.replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, '');

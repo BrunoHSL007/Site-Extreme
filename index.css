@@ -5,6 +5,7 @@
 :root{
 	--font-color: whitesmoke;
     --secondary-font-color: gray;
+    --background-color: rgba(37, 37, 37, 0.5);
 }
 body{
     font-variant-ligatures: none;
@@ -38,7 +39,7 @@ body{
     margin-bottom: 1em;
     padding-top: 0.7em;
     padding-bottom: 0.7em;
-    background-color: rgba(30, 30, 30, 0.5);
+    background-color: var(--background-color);
     color: var(--font-color);
     border-radius: 0.5em;
     border-color: rgba(0, 0, 0, 0);
@@ -48,6 +49,9 @@ body{
     font-weight: 700;
     font-variant-caps: all-petite-caps;
     font-variant-ligatures: none;
+}
+.btn-secondary{
+    font-size: medium !important;
 }
 .btn:hover{
     background-color: rgba(100, 100, 100, 0.5);
@@ -69,6 +73,22 @@ body{
     margin-right: 5%;
     margin-top: 1em;
     margin-bottom: 2em;
+}
+.presentationtitle{
+    max-width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+    padding: 0.2em;
+    font-family: 'Stretch';
+    color: var(--font-color);
+    background-color: rgb(210, 0, 0);
+    font-variant-caps: all-petite-caps;
+    font-size: xx-large;
+    text-align: center;
+    transform: skew(-30deg);
+    box-shadow: 5px 5px var(--font-color);
 }
 .pixlogo{
     margin-top: 4em;
@@ -102,8 +122,8 @@ body{
     justify-content: space-between;
 }
 .details{
-    font-family: 'Stretch';
     color: var(--font-color);
+    font-weight: 300;
     font-variant-caps: all-petite-caps;
     margin-top: 0.5em;
     margin-bottom: 1em;
@@ -121,6 +141,11 @@ h1{
     max-width: 100%;
     height: 2px;
     background-color:var(--font-color)
+}
+.spacer{
+    margin-top: 1em;
+    margin-bottom: 2em;
+    max-width: 100%;
 }
 .backmain{
     background-color: transparent;
@@ -156,10 +181,10 @@ h1{
 }
 
 .skeleton-image{
-    width: 100%;
-    height: 10em;
-    margin-top: 1em;
-    border-radius: 0.5em;
+  width: 100%;
+  height: 10em;
+  margin-top: 1em;
+  border-radius: 0.5em;
   background: rgba(255,255,255,0.15);
   position: relative;
   overflow: hidden;
@@ -180,4 +205,69 @@ h1{
     height: 1em;
     margin-bottom: 0.5em;
     border-radius: 0.25em;
+}
+
+
+.card {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    max-width: 100%;
+    background: var(--background-color);
+    padding: 1em;
+    border-radius: 0.8em;
+    color: white;
+    font-weight: 700;
+    font-variant-caps: all-petite-caps;
+    font-variant-ligatures: none;
+    border-color: var(--font-color);
+    border:2px solid rgba(255,255,255,0.15);
+}
+
+.leaderboard h2 {
+    text-align: center;
+    margin-bottom: 0.8em;
+}
+
+.table {
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+    border:2px solid rgba(255,255,255,0.15);
+    border-radius: 1em;
+    color: white;
+    background-color: var(--background-color);
+    font-weight: 700;
+    font-variant-caps: all-petite-caps;
+    font-variant-ligatures: none;
+}
+
+
+.row {
+    display: grid;
+    grid-template-columns: 40px 1fr 80px;
+    align-items: center;
+    padding-bottom: 0.2em;
+}
+
+.table .row{
+    display: grid;
+    grid-template-columns: 40px 40px 1fr 80px;
+    align-items: center;
+    padding: 0.8em 1em;
+}
+
+.row.header {
+    font-weight: bold;
+    background: rgba(255,255,255,0.15);
+    border-top-left-radius: 0.8em;
+    border-top-right-radius: 0.8em;
+}
+
+.row span:last-child {
+    text-align: right;
+}
+
+.tribologo{
+    max-width: 30px;
+    
 }

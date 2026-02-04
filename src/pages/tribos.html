@@ -1,6 +1,223 @@
 <div class="container">
     <button class="backmain" onclick='go("home")'>
-        <img class="logosub" src="src/images/LOGO X.png">
+        <img class="logosub" src="src/images/LOGOX.png">
     </button>
 
+    <h1 class="presentationtitle">Tribos Extreme</h1>
+
+    <h1 class="title textcenter">
+        Classificação
+    </h1>
+    
+    <div class="table">
+        <div class="row header">
+            <span>#</span>
+            <span>Tribo</span>
+            <span></span>
+            <span>Pontos</span>
+        </div>
+
+        <template id="ranking-template">
+            <div class="row">
+                <span class="skeleton skeleton-text" ranking-position></span>
+                <div class="post-container skeleton skeleton-text">
+                    <img src="" alt="" class="tribologo" ranking-img/> 
+                </div>
+                <span class="skeleton skeleton-text" ranking-name></span>
+                <span class="skeleton skeleton-text" ranking-points></span>
+            </div>
+        </template>
+        <div class="ranking"></div>
+    </div>
+
+
+    <div class="spacer"></div>
+
+    <h1 class="title textcenter">
+        Eventos
+    </h1>
+
+    <template id="events-template">
+        <div class="card">
+            <div class="titleItems textwithenter">
+                <h1 class="title skeleton skeleton-text" events-title></h1>
+                <h1 class="scheduletitle skeleton skeleton-text" events-scheduletitle></h1>
+            </div>
+
+            <p class="details textwithenter skeleton skeleton-detail" events-details></p>
+
+            <button class="btn btn-2ary skeleton textwithenter" events-buttonInfo></button>
+
+            <div class="row" events-0>
+                <img src="" events-img-0 class="tribologo skeleton skeleton-image"/>
+                <span class="skeleton skeleton-text" events-name-0></span>
+                <span class="skeleton skeleton-text" events-points-0></span>
+            </div>
+
+            <div class="row" events-1>
+                <img src="" events-img-1 class="tribologo skeleton skeleton-image"/>
+                <span class="skeleton skeleton-text" events-name-1></span>
+                <span class="skeleton skeleton-text" events-points-1></span>
+            </div>
+
+            <div class="row" events-2>
+                <img src="" events-img-2 class="tribologo skeleton skeleton-image"/>
+                <span class="skeleton skeleton-text" events-name-2></span>
+                <span class="skeleton skeleton-text" events-points-2></span>
+            </div>
+
+            <div class="row" events-3>
+                <img src="" events-img-3 class="tribologo skeleton skeleton-image"/>
+                <span class="skeleton skeleton-text" events-name-3></span>
+                <span class="skeleton skeleton-text" events-points-3></span>
+            </div>            
+
+        </div>
+    </template>
+
+    <div class="events"></div>  
+
 </div>
+
+<script>
+
+    let ranking = document.querySelector('.ranking');
+    let rankingtemplate = document.getElementById('ranking-template');
+
+    for(let i = 0; i < 4; i++) {
+        ranking.append(rankingtemplate.content.cloneNode(true));
+    }
+
+    let events = document.querySelector('.events');
+    let eventstemplate = document.getElementById('events-template');
+
+    for(let i = 0; i < 10; i++) {
+        events.append(eventstemplate.content.cloneNode(true));
+    }
+
+      
+
+    getData("getTriboPoints")
+    .then(data => {
+        const eventsDiv = document.querySelector('.events');
+        events.innerHTML = '';
+        let totaltribepoints = [
+            {
+                name: "BENJAMIN",
+                points: 0
+            },
+            {
+                name: "ISSACAR",
+                points: 0
+            },
+            {
+                name: "JUDA",
+                points: 0
+            },
+            {
+                name: "ZEBULOM",
+                points: 0
+            }
+        ];
+
+        
+
+        data.map((item,count) => {
+            
+            const initialdate = parseDate(item[9]);
+            const finaldate = parseDate(item[10]);
+            const today = new Date();
+
+            if ((initialdate !== null && initialdate > today) || (finaldate !== null && finaldate < today)) {
+                return;
+            }
+
+            const div = eventstemplate.content.cloneNode(true);
+            div.querySelector('[events-title]').textContent = item[0];
+            div.querySelector('[events-scheduletitle]').textContent = item[2];
+            div.querySelector('[events-details]').textContent = item[1];
+
+            const tribepoints = [
+                {
+                    name: "BENJAMIN",
+                    points: parseInt(item[3])
+                },
+                {
+                    name: "ISSACAR",
+                    points: parseInt(item[4])
+                },
+                {
+                    name: "JUDA",
+                    points: parseInt(item[5])
+                },
+                {
+                    name: "ZEBULOM",
+                    points: parseInt(item[6])
+                }
+            ];
+
+            totaltribepoints = totaltribepoints.concat(tribepoints);
+
+            tribepoints.sort((a, b) => b.points - a.points);
+
+            tribepoints.forEach((tribe,index) => {
+                if(tribe.points && tribe.points !== '0'){
+                    div.querySelector(`[events-img-${index}]`).src = `src/images/LOGO${tribe.name}.png`;
+                    div.querySelector(`[events-name-${index}]`).textContent = tribe.name;
+                    div.querySelector(`[events-points-${index}]`).textContent = tribe.points;
+                }
+                else{
+                    div.querySelector(`[events-${index}]`).style = "display: none;"
+                }    
+            });
+            
+
+            if(item[7] && item[8]){
+                div.querySelector('[events-buttonInfo]').textContent = item[7];
+                div.querySelector('[events-buttonInfo]').onclick = () => {
+                    location.href = item[8];
+                };
+            }
+            else{
+                div.querySelector('[events-buttonInfo]').style = "display: none;"
+            }    
+
+            events.appendChild(div);
+
+        })
+
+        if(events.innerHTML === ""){
+            const aviso = `<div class="spacer"></div><p class="textcenter details">Salmos 37: 7-8</p>`;
+            events.innerHTML = aviso;
+        }
+
+        let rankingPoints = Object.values(
+            totaltribepoints.reduce((acc, tribe) => {
+                if (!acc[tribe.name]) {
+                    acc[tribe.name] = { ...tribe };
+                } else {
+                    acc[tribe.name].points += tribe.points;
+                }
+                return acc;
+            }, {})
+        );
+        console.log(rankingPoints)
+        rankingPoints.sort((a, b) => b.points - a.points);
+
+        console.log(rankingPoints)
+
+        ranking.innerHTML = ""
+
+        rankingPoints.forEach((tribe,index) => {
+            const divRanking = rankingtemplate.content.cloneNode(true);
+            
+            divRanking.querySelector(`[ranking-position]`).textContent = index+1;
+            divRanking.querySelector(`[ranking-img]`).src = `src/images/LOGO${tribe.name}.png`;
+            divRanking.querySelector(`[ranking-name]`).textContent = tribe.name;
+            divRanking.querySelector(`[ranking-points`).textContent = tribe.points;
+            ranking.appendChild(divRanking);
+        });
+        clearSkeleton(ranking);
+        clearSkeleton(events);
+    });
+</script>
