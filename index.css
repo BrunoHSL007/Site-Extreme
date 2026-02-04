@@ -2,6 +2,10 @@
     font-family: 'Stretch';
     src: url('src/fonts/stretchpro/StretchPro.otf') format('opentype');
 }
+:root{
+	--font-color: whitesmoke;
+    --secondary-font-color: gray;
+}
 body{
     font-variant-ligatures: none;
 }
@@ -11,6 +15,7 @@ body{
 .container {
     display: flex;
     flex-direction: column;
+    align-items: stretch;
     justify-content: space-between;
     margin-left: auto;
     margin-right: auto;
@@ -33,15 +38,16 @@ body{
     margin-bottom: 1em;
     padding-top: 0.7em;
     padding-bottom: 0.7em;
-    min-width: 100%;
     background-color: rgba(30, 30, 30, 0.5);
-    color: whitesmoke;
+    color: var(--font-color);
     border-radius: 0.5em;
     border-color: rgba(0, 0, 0, 0);
     font-family: 'Stretch';
     font-size: larger;
+    width: 100%;
     font-weight: 700;
     font-variant-caps: all-petite-caps;
+    font-variant-ligatures: none;
 }
 .btn:hover{
     background-color: rgba(100, 100, 100, 0.5);
@@ -78,7 +84,7 @@ body{
 }
 .title{
     font-family: 'Stretch';
-    color: whitesmoke;
+    color: var(--font-color);
     font-variant-caps: all-petite-caps;
     margin-bottom: 0.2em;
     margin-top: 0.2em;
@@ -86,7 +92,7 @@ body{
 .scheduletitle{
     text-align: right;
     font-family: 'Stretch';
-    color: whitesmoke;
+    color: var(--font-color);
     font-variant-caps: all-petite-caps;
     margin-bottom: 0.2em;
     margin-top: 0.2em;
@@ -97,7 +103,7 @@ body{
 }
 .details{
     font-family: 'Stretch';
-    color: whitesmoke;
+    color: var(--font-color);
     font-variant-caps: all-petite-caps;
     margin-top: 0.5em;
     margin-bottom: 1em;
@@ -114,7 +120,7 @@ h1{
     margin-bottom: 1em;
     max-width: 100%;
     height: 2px;
-    background-color:whitesmoke
+    background-color:var(--font-color)
 }
 .backmain{
     background-color: transparent;
@@ -122,13 +128,13 @@ h1{
 }
 .comingsoon{
     font-family: 'Stretch';
-    color: whitesmoke;
+    color: var(--font-color);
     font-variant-caps: all-petite-caps;
     text-align: center;
 }
 .madewith{
     font-family: 'Stretch';
-    color: gray;
+    color: var(--secondary-font-color);
     font-size: xx-small;
     text-align: center;
     margin-top: 2em;
@@ -154,13 +160,18 @@ h1{
     height: 10em;
     margin-top: 1em;
     border-radius: 0.5em;
+  background: rgba(255,255,255,0.15);
+  position: relative;
+  overflow: hidden;
 }
-.skeleton-text{
+.post:not([src]),
+.post[src=""]{
+  opacity: 0;
+}
 
-    width: 100%;
-    height: 2.5em;
-    margin-top: 0.5em;
-    margin-bottom: 1em;
+.skeleton-text{
+    width: 45%;
+    height: 1em;
     border-radius: 0.25em;
 }
 

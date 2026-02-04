@@ -5,13 +5,22 @@
 
     <img class="logotitle" src="src/images/Agenda.png">
 
+
     <template id="card-template">
-        <div class="skeleton skeleton-text"></div>
-        <div class="skeleton skeleton-text skeleton-detail"></div>
-        <div class="skeleton skeleton-text skeleton-detail"></div>
-        <div class="post skeleton skeleton-image"></div>
-        <div class="divider skeleton"></div>  
-    </template>
+        <div class="titleItems textwithenter">
+            <h1 class="title skeleton skeleton-text" data-title></h1>
+            <h1 class="scheduletitle skeleton skeleton-text" data-scheduletitle></h1>
+        </div>
+
+        <p class="details skeleton skeleton-text skeleton-detail textwithenter" data-details></p>
+
+        <button class="btn skeleton textwithenter" data-buttonInfo></button>
+
+        <div class="post-container skeleton skeleton-image">
+            <img class="post" src="" alt="" data-imagePost>
+        </div>
+        <div class="divider skeleton" data-divider></div>
+    </template>  
 
     <div class="posts"></div>        
 
@@ -41,14 +50,19 @@
         return sheetsData;
     }
 
+    function clearSkeleton(container){
+        container.querySelectorAll(".skeleton, .skeleton-text, .skeleton-image, .skeleton-detail")
+            .forEach(el => {
+                el.classList.remove("skeleton","skeleton-text","skeleton-image","skeleton-detail");
+            });
+    }
+
     getData()
     .then(data => {
         const postsDiv = document.querySelector('.posts');
-        postsDiv.className = 'textwithenter';
         posts.innerHTML = '';
 
         data.map((item,count) => {
-            // TODO Mudar para utilizar o skeleton
             // https://www.youtube.com/watch?v=ZVug65gW-fc
             
             const initialdate = parseData(item[3]);
@@ -58,53 +72,38 @@
             if ((initialdate !== null && initialdate > today) || (finaldate !== null && finaldate < today)) {
                 return;
             }
-            const title = document.createElement('h1');
-            title.className = 'title';
-            title.textContent = item[0];
 
-            const scheduletitle = document.createElement('h1');
-            scheduletitle.className = 'scheduletitle';
-            scheduletitle.textContent = item[2];
-
-            const titleItems = document.createElement('div');
-            titleItems.className = 'titleItems';
-
-            titleItems.appendChild(title);
-            titleItems.appendChild(scheduletitle);
-            postsDiv.appendChild(titleItems);
-
-            const details = document.createElement('p');
-            details.className = 'details';
-            details.textContent = item[1];
-
-            postsDiv.appendChild(details);
+            const div = cardtemplate.content.cloneNode(true);
+            div.querySelector('[data-title]').textContent = item[0];
+            div.querySelector('[data-scheduletitle]').textContent = item[2];
+            div.querySelector('[data-details]').textContent = item[1];
+            
 
             if(item[5] && item[6]){
-                const buttonDiv = document.createElement('button');
-                buttonDiv.textContent = item[5];
-                buttonDiv.className = 'btn';
-                buttonDiv.onclick = () => {
-                location.href = item[6];
-            };
-            postsDiv.appendChild(buttonDiv);
-        }
+                div.querySelector('[data-buttonInfo]').textContent = item[5];
+                div.querySelector('[data-buttonInfo]').onclick = () => {
+                    location.href = item[6];
+                };
+            }
+            else{
+                div.querySelector('[data-buttonInfo]').style = "display: none;"
+            }
 
-        if(item[7]){
-            const img = document.createElement('img');
-            img.className = 'post';
-            img.src = item[7];   
-            img.onerror = function() {
-                this.style.display = 'none';
-            };
-            postsDiv.appendChild(img);
-        }                
+            if(item[7]){
+                div.querySelector('[data-imagePost]').className = 'post';
+                div.querySelector('[data-imagePost]').src = item[7];   
+                div.querySelector('[data-imagePost]').onerror = function() {
+                    this.style.display = 'none';
+                };
+            }                
 
-        if(count < data.length - 1){
-            const divider = document.createElement('div');
-            divider.className = 'divider';
-            postsDiv.appendChild(divider);
-        }
+            if(count == data.length - 1){
+                div.querySelector('[data-divider]').style = "display: none;"
+            }
 
-    })
-});
+            posts.appendChild(div);
+
+        })
+        clearSkeleton(posts);
+    });
 </script>
