@@ -56,11 +56,15 @@ body{
 .btn:hover{
     background-color: rgba(100, 100, 100, 0.5);
 }
-.logomain{
+.logomain {
+    width: auto;
     max-width: 90%;
     height: auto;
+    object-fit: contain;
     display: block;
     margin: 0 auto 1em;
+    flex-shrink: 0;
+    align-self: center;
 }
 .logosub{
     max-width: 40%;
@@ -123,6 +127,7 @@ body{
     justify-content: space-between;
 }
 .details{
+    font-family: system-ui, -apple-system, sans-serif !important;
     color: var(--font-color);
     font-weight: 300;
     font-variant-caps: all-petite-caps;
@@ -244,6 +249,9 @@ h1{
 
 
 .row {
+    font-family: system-ui, -apple-system, sans-serif !important;
+    color: var(--font-color);
+    font-variant-caps: all-petite-caps;
     display: grid;
     grid-template-columns: 40px 1fr 80px;
     align-items: center;
