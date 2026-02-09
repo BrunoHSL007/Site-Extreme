@@ -5,6 +5,15 @@
 
     <h1 class="presentationtitle">Agenda Extreme</h1>
 
+    <template id="button-agenda-template">
+        <button class="btn btn-secondary skeleton textwithenter"></button>            
+    </template>
+
+    <template id="image-agenda-template">
+        <div class="post-container skeleton skeleton-image">
+            <img class="post" src="" alt="">
+        </div>
+    </template>
 
     <template id="card-template">
         <div class="card">
@@ -15,11 +24,11 @@
 
             <p class="details skeleton skeleton-text skeleton-detail textwithenter" data-details></p>
 
-            <button class="btn btn-secondary skeleton textwithenter" data-buttonInfo></button>
+            <div class="skeleton textwithenter" data-buttonInfo></div>            
 
-            <div class="post-container skeleton skeleton-image">
-                <img class="post" src="" alt="" data-imagePost>
+            <div class="skeleton skeleton-image" data-imagePost>
             </div>
+
         </div>
     </template>  
 
@@ -35,7 +44,7 @@
         posts.append(cardtemplate.content.cloneNode(true));
     }  
 
-    getData("getAgenda")
+    getData("Eventos")
     .then(data => {
         const postsDiv = document.querySelector('.posts');
         posts.innerHTML = '';
@@ -54,25 +63,38 @@
             const div = cardtemplate.content.cloneNode(true);
             div.querySelector('[data-title]').textContent = item[0];
             div.querySelector('[data-scheduletitle]').textContent = item[2];
-            div.querySelector('[data-details]').textContent = item[1];
+            div.querySelector('[data-details]').textContent = item[1];           
             
 
             if(item[5] && item[6]){
-                div.querySelector('[data-buttonInfo]').textContent = item[5];
-                div.querySelector('[data-buttonInfo]').onclick = () => {
-                    location.href = item[6];
-                };
-            }
-            else{
-                div.querySelector('[data-buttonInfo]').style = "display: none;"
+                const buttonTemplate = document.getElementById('button-agenda-template');
+                const buttonNames = item[5].split('\n');
+                const buttonUrls = item[6].split('\n');                
+                    
+                buttonUrls.forEach((element,index) => {                    
+                    let buttonDiv = buttonTemplate.content.cloneNode(true);
+                    buttonDiv.firstElementChild.textContent = buttonNames[index];
+                    buttonDiv.firstElementChild.onclick = () => {
+                        location.href = element;
+                    };
+                    div.querySelector('[data-buttonInfo]').appendChild(buttonDiv);
+                });
             }
 
             if(item[7]){
-                div.querySelector('[data-imagePost]').className = 'post';
-                div.querySelector('[data-imagePost]').src = item[7];   
-                div.querySelector('[data-imagePost]').onerror = function() {
-                    this.style.display = 'none';
-                };
+                const imageTemplate = document.getElementById('image-agenda-template');
+                const imageUrls = item[7].split('\n');          
+
+                imageUrls.forEach(element => {    
+                    let imageDiv = imageTemplate.content.cloneNode(true);
+                    imageDiv.firstElementChild.firstElementChild.className = 'post';
+                    imageDiv.firstElementChild.firstElementChild.src = element;
+                    imageDiv.firstElementChild.firstElementChild.onerror = function() {
+                        this.style.display = 'none';
+                    };
+                    
+                    div.querySelector('[data-imagePost]').appendChild(imageDiv);
+                });
             }                
 
             posts.appendChild(div);

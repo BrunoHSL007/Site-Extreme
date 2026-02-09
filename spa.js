@@ -14,8 +14,7 @@ function clearSkeleton(container){
 let sheetsData = []; 
 async function getData(file){
     if(sheetsData[file]) return sheetsData[file];
-    console.log("Fetching data...");
-    const res = await fetch(`/.netlify/functions/${file}`);
+    const res = await fetch(`/.netlify/functions/getSheetsData?tab=${file}`);
     sheetsData[file] = await res.json();
     return sheetsData[file];
 }

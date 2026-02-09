@@ -52,6 +52,7 @@ body{
 }
 .btn-secondary{
     font-size: medium !important;
+    margin-bottom: 0em !important;
 }
 .btn:hover{
     background-color: rgba(100, 100, 100, 0.5);
@@ -132,7 +133,7 @@ body{
     font-weight: 300;
     font-variant-caps: all-petite-caps;
     margin-top: 0.5em;
-    margin-bottom: 1em;
+    margin-bottom: 0.5em;
     
 }
 .textcenter{
@@ -198,6 +199,10 @@ h1{
 .post:not([src]),
 .post[src=""]{
   opacity: 0;
+}
+
+.post-container:first-child{
+    margin-top: 1em;
 }
 
 .skeleton-text{

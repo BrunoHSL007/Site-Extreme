@@ -3,8 +3,10 @@ const { google } = require("googleapis");
 let cache = null;
 let lastFetch = 0;
 
-exports.handler = async () => {
+exports.handler = async (event) => {
   try {
+    const tab = event.queryStringParameters?.tab || "Eventos";
+    console.log(tab);
     const now = Date.now();
 
     if (cache && now - lastFetch < 60_000) {
@@ -27,7 +29,7 @@ exports.handler = async () => {
 
     const res = await sheets.spreadsheets.values.get({
       spreadsheetId: process.env.GOOGLE_SHEET_ID,
-      range: "PontuacaoTribos!A2:Z",
+      range: `${tab}!A2:Z`,
     });
 
     cache = res.data.values || [];
