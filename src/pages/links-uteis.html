@@ -1,0 +1,55 @@
+<div class="container">
+    <button class="backmain" onclick='go("home")'>
+        <img class="logosub" src="src/images/LOGOX.png">
+    </button>
+
+    <h1 class="presentationtitle">Links Uteis</h1>
+
+    <template id="button-link-template">
+        <button class="btn skeleton textwithenter" data-linkInfo></button>
+    </template>
+
+    <div class="links"></div>        
+
+</div>
+
+<script>
+
+    let links = document.querySelector('.links');
+    let linkstemplate = document.getElementById('button-link-template');
+    for(let i = 0; i < 10; i++) {
+        links.append(linkstemplate.content.cloneNode(true));
+    }  
+
+    getData("LinksUteis")
+    .then(data => {
+        links.innerHTML = '';
+        
+        data.map((item,count) => {
+            
+            const initialdate = parseDate(item[2]);
+            const finaldate = parseDate(item[3]);
+            const today = new Date();
+
+            if ((initialdate !== null && initialdate > today) || (finaldate !== null && finaldate < today)) {
+                return;
+            }
+
+            const div = linkstemplate.content.cloneNode(true);
+            div.querySelector('[data-linkInfo]').textContent = item[0];
+            div.querySelector('[data-linkInfo]').onclick = () => {
+                    location.href = item[1];
+                };
+
+            links.appendChild(div);
+
+        })
+        clearSkeleton(links);
+
+        if(links.innerHTML ===""){
+            const aviso = `<p class="textcenter details">Nada por aqui ;D</p>`;
+            links.innerHTML = aviso;
+        }
+        
+    });
+</script>
