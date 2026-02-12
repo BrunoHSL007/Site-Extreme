@@ -1,21 +1,20 @@
 const { google } = require("googleapis");
 
-let cache = null;
-let lastFetch = 0;
+let cache = [];
+let lastFetch = [];
 
 exports.handler = async (event) => {
   try {
     const tab = event.queryStringParameters?.tab || "Eventos";
-    console.log(tab);
-    const now = Date.now();
+    const now = Date.now();    
 
-    if (cache && now - lastFetch < 60_000) {
+    if (cache[tab] && now - lastFetch[tab] < 60_000) {
       return {
         statusCode: 200,
         headers: {
           "Cache-Control": "public, max-age=300"
         },
-        body: JSON.stringify(cache)
+        body: JSON.stringify(cache[tab])
       };
     }
 
@@ -32,8 +31,8 @@ exports.handler = async (event) => {
       range: `${tab}!A2:Z`,
     });
 
-    cache = res.data.values || [];
-    lastFetch = now;
+    cache[tab] = res.data.values || [];
+    lastFetch[tab] = now;
 
     return {
       statusCode: 200,
